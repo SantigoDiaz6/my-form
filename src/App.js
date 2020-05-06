@@ -1,13 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends React.Component {
   state = {
     titulo: '',
     descripcion: '',
+    fecha: '',
     completada: false,
-    tareas: []
+    users: []
   };
 
   handleChange = (e) => {
@@ -22,22 +22,36 @@ class App extends React.Component {
     e.preventDefault();
     console.log(e);
 
-    const { titulo, descripcion, completada } = this.state;
-    const user = { titulo, descripcion, completada };
+    const user = {
+      titulo : this.state.titulo,
+      descripcion : this.state.descripcion,
+      fecha : this.state.fecha,
+      completada : this.state.completada
+    }
+    // const { titulo, descripcion, fecha, completada } = this.state;
+    // const user = { titulo, descripcion,fecha, completada };
     const users = this.state.users.concat(user)
 
-    this.state({
-      users,
-      titulo: '',
-      descripcion: '',
-      completada: false
-    }, () => console.log(this.state))
+    this.setState({ users:users })
+    console.log(this.state)
+
   }
 
+  //   this.state({
+  //     users,
+  //     titulo: '',
+  //     descripcion: '',
+  //     completada: false
+  //   }, () => console.log(this.state))
+  // }
+
   render() {
+
     return (
       <div className="App">
+
         <form onSubmit={this.handleSubmit}>
+
           <label htmlFor="titulo">Title</label>
           <input
             type="text"
@@ -48,11 +62,19 @@ class App extends React.Component {
           />
           <label htmlFor="descripcion">Description</label>
           <textarea
-            //type="text"
+            type="text"
             onChange={this.handleChange}
             value={this.state.descripcion}
             name="descripcion"
             id="descripcion"
+          />
+          <label htmlFor="fecha">Date</label>
+          <input
+            type="date"
+            onChange={this.handleChange}
+            value={this.state.fecha}
+            name="fecha"
+            id="fecha"
           />
           <label htmlFor="completada">Completed</label>
           <input
