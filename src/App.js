@@ -22,31 +22,29 @@ class App extends React.Component {
     e.preventDefault();
     console.log(e);
 
-    const user = {
-      titulo : this.state.titulo,
-      descripcion : this.state.descripcion,
-      fecha : this.state.fecha,
-      completada : this.state.completada
-    }
-    // const { titulo, descripcion, fecha, completada } = this.state;
-    // const user = { titulo, descripcion,fecha, completada };
+    // const user = {
+    //   titulo : this.state.titulo,
+    //   descripcion : this.state.descripcion,
+    //   fecha : this.state.fecha,
+    //   completada : this.state.completada
+    // }
+    const { titulo, descripcion, fecha, completada } = this.state;
+    const user = { titulo, descripcion, fecha, completada };
     const users = this.state.users.concat(user)
 
-    this.setState({ users:users })
-    console.log(this.state)
+    // this.setState({ users:users })
+    // console.log(this.state)
 
+    this.setState({
+      users,
+      titulo: '',
+      descripcion: '',
+      fecha: '',
+      completada: false
+    }, () => console.log(this.state))
   }
 
-  //   this.state({
-  //     users,
-  //     titulo: '',
-  //     descripcion: '',
-  //     completada: false
-  //   }, () => console.log(this.state))
-  // }
-
   render() {
-
     return (
       <div className="App">
 
@@ -80,7 +78,7 @@ class App extends React.Component {
           <input
             type="checkbox"
             onChange={this.handleChange}
-            value={this.state.completada}
+            checked={this.state.completada}
             name="completada"
             id="completada"
           />
